@@ -20,12 +20,12 @@ const storage = multer.diskStorage({
 
     // Sanitize filename: remove special characters, replace spaces, and trim dots
     const sanitizedFilename = baseName
-      .replace(/\s+/g, "_") // Replace spaces with underscores
-      .replace(/[^a-zA-Z0-9_\-]/g, "") // Keep only safe characters
-      .replace(/^\.|\.+$/g, "") // Prevent hidden files
+      .replace(/\s+/g, "-") // Replace spaces with underscores
+      .replace(/[^a-zA-Z0-9_\-]/g, "-") // Keep only safe characters
+      .replace(/^\.|\.+$/g, "-") // Prevent hidden files
       .toLowerCase(); // Normalize case
 
-    cb(null, `${cuid()}_${sanitizedFilename}${ext}`);
+    cb(null, `${cuid()}-${sanitizedFilename}${ext}`);
   },
 });
 
@@ -42,10 +42,10 @@ const upload = multer({
 
 const buildFileUrl = (req, file) =>
   // in development
-  `${req.protocol}://${req.get("host")}/media/${file}`;
+  // `${req.protocol}://${req.get("host")}/media/${file}`;
 
-// in production use https
-// `https://${req.get("host")}/media/${file}`;
+  // in production use https
+  `https://${req.get("host")}/media/${file}`;
 
 // Upload image
 router.post("/", authentication, upload.single("image"), (req, res) => {
