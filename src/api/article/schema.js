@@ -2,7 +2,7 @@ const Joi = require("joi");
 
 const create = Joi.object({
   content: Joi.string().required(),
-  description: Joi.string().required(),
+  description: Joi.string().required().empty("").default(""),
   image: Joi.string().required(),
   title: Joi.string().required(),
   userId: Joi.string().required(),
@@ -16,7 +16,7 @@ const get = Joi.object({
 const update = Joi.object({
   id: Joi.string().required(),
   content: Joi.string().required(),
-  description: Joi.string().required(),
+  description: Joi.string().required().empty("").default(""),
   image: Joi.string().required(),
   title: Joi.string().required(),
   userId: Joi.string().required(),

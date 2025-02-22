@@ -3,6 +3,8 @@ const fs = require("fs");
 const multer = require("multer");
 const cuid = require("cuid");
 const path = require("path");
+const slugify = require("slugify");
+
 const authentication = require("../../middleware/authentication");
 
 const responseError = require("../../error/responseError");
@@ -13,7 +15,19 @@ const mediaFolder = path.join(__dirname, "../../../media");
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => cb(null, mediaFolder),
-  filename: (req, file, cb) => cb(null, `${cuid()}-${file.originalname}`),
+  filename: (req, file, cb) => {
+    const ext = path.extname(file.originalname).toLowerCase();
+    const baseName = path.basename(file.originalname, ext);
+
+    // Use slugify to sanitize filename
+    const sanitizedFilename = slugify(baseName, {
+      lower: true, // Convert to lowercase
+      strict: true, // Remove special characters
+      replacement: "-", // Replace spaces with hyphens
+    });
+
+    cb(null, `${cuid()}-${sanitizedFilename}${ext}`);
+  },
 });
 
 const upload = multer({

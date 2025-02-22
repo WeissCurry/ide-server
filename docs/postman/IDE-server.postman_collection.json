@@ -22,12 +22,12 @@
 							"urlencoded": [
 								{
 									"key": "email",
-									"value": "sebuahemail@email.com",
+									"value": "superadmintest@example.com",
 									"type": "text"
 								},
 								{
 									"key": "password",
-									"value": "sebuahpassword",
+									"value": "superadmin",
 									"type": "text"
 								}
 							]
@@ -210,12 +210,26 @@
 					"name": "get all user",
 					"request": {
 						"auth": {
-							"type": "noauth"
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNtNmcxaDBqYzAwMDB0YTc4eTRoMmxzdXYiLCJpYXQiOjE3NDAwNTQ5OTQsImV4cCI6MTc0MDY1OTc5NH0.hFi1AUbC91p7F5NO6jYBc27R13iOEs5Rx24P6w-iF2I",
+									"type": "string"
+								}
+							]
 						},
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNtNmcxaDBqYzAwMDB0YTc4eTRoMmxzdXYiLCJpYXQiOjE3NDAwNTQ5OTQsImV4cCI6MTc0MDY1OTc5NH0.hFi1AUbC91p7F5NO6jYBc27R13iOEs5Rx24P6w-iF2I",
+								"type": "text",
+								"disabled": true
+							}
+						],
 						"url": {
-							"raw": "http://localhost:3001/user",
+							"raw": "http://localhost:3001/user?page=1&size=10",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -223,6 +237,16 @@
 							"port": "3001",
 							"path": [
 								"user"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								}
 							]
 						}
 					},
@@ -618,12 +642,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "https://server-ideindonesia.ideatecore.com/article?page=1&search=hello&size=10",
-							"protocol": "https",
+							"raw": "{{IDE-Indonesia-local}}/article?page=1&search=Component&size=10&searchByCategory=cm6g3di0o0009tadkgfbj4coz",
 							"host": [
-								"server-ideindonesia",
-								"ideatecore",
-								"com"
+								"{{IDE-Indonesia-local}}"
 							],
 							"path": [
 								"article"
@@ -635,11 +656,15 @@
 								},
 								{
 									"key": "search",
-									"value": "hello"
+									"value": "Component"
 								},
 								{
 									"key": "size",
 									"value": "10"
+								},
+								{
+									"key": "searchByCategory",
+									"value": "cm6g3di0o0009tadkgfbj4coz"
 								}
 							]
 						}
@@ -990,7 +1015,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3001/partner",
+							"raw": "http://localhost:3001/partner?size=2&page=2",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -998,6 +1023,16 @@
 							"port": "3001",
 							"path": [
 								"partner"
+							],
+							"query": [
+								{
+									"key": "size",
+									"value": "2"
+								},
+								{
+									"key": "page",
+									"value": "2"
+								}
 							]
 						}
 					},
@@ -1209,7 +1244,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3001/subscribe",
+							"raw": "http://localhost:3001/subscribe?page=1&size=10",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1217,6 +1252,16 @@
 							"port": "3001",
 							"path": [
 								"subscribe"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								}
 							]
 						}
 					},
@@ -1334,7 +1379,7 @@
 								},
 								{
 									"key": "message",
-									"value": "test",
+									"value": "As JavaScript evolves, some libraries inevitably fall behind, unable to keep up with the developer community’s expectations for the latest features, paradigms, and performance. It’s time to bid farewell to certain libraries that no longer meet our needs. This article will focus on five JavaScript libraries that may become obsolete by 2025 and the reasons why.",
 									"type": "text"
 								}
 							]
@@ -1918,6 +1963,101 @@
 							"path": [
 								"program",
 								"cm70w289q0001ta3g9jwqqvle"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all program",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{IDE-Indonesia-local}}/program?search=&page=1&size=5&searchByCategory=",
+							"host": [
+								"{{IDE-Indonesia-local}}"
+							],
+							"path": [
+								"program"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": ""
+								},
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "size",
+									"value": "5"
+								},
+								{
+									"key": "searchByCategory",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "metric data",
+			"item": [
+				{
+					"name": "{{IDE-Indonesia-local}}/metric",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{IDE-Indonesia}}/metric",
+							"host": [
+								"{{IDE-Indonesia}}"
+							],
+							"path": [
+								"metric"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "{{IDE-Indonesia-local}}/metric/visit",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "ip",
+									"value": "123.123.123.123",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{IDE-Indonesia-local}}/metric/visit",
+							"host": [
+								"{{IDE-Indonesia-local}}"
+							],
+							"path": [
+								"metric",
+								"visit"
 							]
 						}
 					},
