@@ -13,7 +13,20 @@ const mediaFolder = path.join(__dirname, "../../../media");
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => cb(null, mediaFolder),
-  filename: (req, file, cb) => cb(null, `${cuid()}-${file.originalname}`),
+  filename: (req, file, cb) => {
+    // Get extension safely
+    const ext = path.extname(file.originalname).toLowerCase();
+    const baseName = path.basename(file.originalname, ext);
+
+    // Sanitize filename: remove special characters, replace spaces, and trim dots
+    const sanitizedFilename = baseName
+      .replace(/\s+/g, "_") // Replace spaces with underscores
+      .replace(/[^a-zA-Z0-9_\-]/g, "") // Keep only safe characters
+      .replace(/^\.|\.+$/g, "") // Prevent hidden files
+      .toLowerCase(); // Normalize case
+
+    cb(null, `${cuid()}_${sanitizedFilename}${ext}`);
+  },
 });
 
 const upload = multer({
