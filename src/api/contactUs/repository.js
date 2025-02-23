@@ -10,6 +10,9 @@ const getAll = async (data) => {
   return await prisma.contactUs.findMany({
     skip: (data.page - 1) * data.size || 0,
     take: data.size || 10,
+    orderBy: {
+      createdAt: "desc",
+    },
   });
 };
 
