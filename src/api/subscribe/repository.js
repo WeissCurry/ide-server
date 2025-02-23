@@ -12,6 +12,9 @@ const getAll = async (data) => {
   const result = await prisma.subscribe.findMany({
     skip: (data.page - 1) * data.size || 0,
     take: data.size || 10,
+    orderBy: {
+      createdAt: "desc",
+    },
   });
 
   return result;
