@@ -7,8 +7,8 @@ const create = async (data) => {
   });
 };
 
-// get all
-const getAll = async (data) => {
+// get Many
+const getMany = async (data) => {
   const result = await prisma.subscribe.findMany({
     skip: (data.page - 1) * data.size || 0,
     take: data.size || 10,
@@ -48,4 +48,24 @@ const remove = async (id) => {
   });
 };
 
-module.exports = { create, getAll, getById, update, remove, totalItems };
+const getAll = async () => {
+  const result = await prisma.subscribe.findMany({
+    select: {
+      id: true,
+      email: true,
+      createdAt: true,
+    },
+  });
+
+  return result;
+};
+
+module.exports = {
+  create,
+  getMany,
+  getById,
+  update,
+  remove,
+  totalItems,
+  getAll,
+};

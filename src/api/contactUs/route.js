@@ -8,7 +8,9 @@ const router = express.Router();
 router.post("/", controller.create);
 
 // get all
-router.get("/", authentication, controller.getAll);
+router.get("/", authentication, controller.getMany);
+
+router.get("/all", authentication, controller.getAll);
 
 // get by id
 router.get("/:contactUsId", authentication, controller.getById);

@@ -6,7 +6,7 @@ const create = async (data) => {
 };
 
 // get all
-const getAll = async (data) => {
+const getMany = async (data) => {
   return await prisma.contactUs.findMany({
     skip: (data.page - 1) * data.size || 0,
     take: data.size || 10,
@@ -37,4 +37,27 @@ const remove = async (id) => {
   return await prisma.contactUs.delete({ where: { id } });
 };
 
-module.exports = { create, getAll, getById, update, remove, totalItems };
+const getAll = async () => {
+  const result = await prisma.contactUs.findMany({
+    select: {
+      id: true,
+      firstName: true,
+      lastName: true,
+      email: true,
+      message: true,
+      createdAt: true,
+    },
+  });
+
+  return result;
+};
+
+module.exports = {
+  create,
+  getMany,
+  getById,
+  update,
+  remove,
+  totalItems,
+  getAll,
+};
