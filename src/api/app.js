@@ -30,6 +30,7 @@ const galleryRoute = require("../api/gallery/route");
 const programCategory = require("../api/programCategory/route");
 const programRoute = require("../api/program/route");
 const metricRoute = require("../api/metric/route");
+const homeImageRoute = require("../api/homeImage/route");
 
 app.use(cookieParser());
 
@@ -104,6 +105,7 @@ app.use("/gallery", galleryRoute);
 app.use("/programcategory", programCategory);
 app.use("/program", programRoute);
 app.use("/metric", metricRoute);
+app.use("/homeimage", homeImageRoute);
 
 app.use("*", (req, res, next) => {
   const endpoint = req.originalUrl;

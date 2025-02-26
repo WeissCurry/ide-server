@@ -26,14 +26,14 @@ const create = async (req, res, next) => {
 };
 
 // get all
-const getAll = async (req, res, next) => {
+const getMany = async (req, res, next) => {
   try {
     const request = {
       page: req.query.page,
       size: req.query.size,
     };
 
-    const response = await service.getAll(request);
+    const response = await service.getMany(request);
 
     res.status(200).json({
       data: response.contactUs,
@@ -125,4 +125,21 @@ const remove = async (req, res, next) => {
   }
 };
 
-module.exports = { create, getAll, getById, update, remove };
+const getAll = async (req, res, next) => {
+  try {
+    const response = await service.getAll();
+
+    res.status(200).json({
+      data: response,
+      error: false,
+      message: "success get all contact us",
+      status: "success",
+      statusCode: 200,
+      success: true,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+module.exports = { create, getMany, getById, update, remove, getAll };

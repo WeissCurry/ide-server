@@ -1,10 +1,10 @@
 const service = require("./service");
-
 // create
+
 const create = async (req, res, next) => {
   try {
     const request = {
-      email: req.body.email,
+      image: req.body.image,
     };
 
     const response = await service.create(request);
@@ -12,7 +12,7 @@ const create = async (req, res, next) => {
     res.status(201).json({
       data: response,
       error: false,
-      message: "success create subscribe",
+      message: "success create home image",
       status: "success",
       statusCode: 201,
       success: true,
@@ -22,26 +22,15 @@ const create = async (req, res, next) => {
   }
 };
 
-// get many
-const getMany = async (req, res, next) => {
+// get all
+const getAll = async (req, res, next) => {
   try {
-    const request = {
-      page: req.query.page,
-      size: req.query.size,
-    };
-
-    const response = await service.getMany(request);
+    const response = await service.getAll();
 
     res.status(200).json({
-      data: response.subscribe,
-      pagination: {
-        currentPage: response.currentPage,
-        perPage: response.perPage,
-        totalItems: response.totalItems,
-        totalPage: response.totalPage,
-      },
+      data: response,
       error: false,
-      message: "success get all subscribe",
+      message: "success get all home image",
       status: "success",
       statusCode: 200,
       success: true,
@@ -55,7 +44,7 @@ const getMany = async (req, res, next) => {
 const getById = async (req, res, next) => {
   try {
     const request = {
-      id: req.params.subscribeId,
+      id: req.params.homeImageId,
     };
 
     const response = await service.getById(request);
@@ -63,7 +52,7 @@ const getById = async (req, res, next) => {
     res.status(200).json({
       data: response,
       error: false,
-      message: "success get subscribe by id",
+      message: "success get home image by id",
       status: "success",
       statusCode: 200,
       success: true,
@@ -74,19 +63,19 @@ const getById = async (req, res, next) => {
 };
 
 // update
-const update = async (req, res, next) => {
+const updateById = async (req, res, next) => {
   try {
     const request = {
-      id: req.params.subscribeId,
-      email: req.body.email,
+      id: req.params.homeImageId,
+      image: req.body.image,
     };
 
-    const response = await service.update(request);
+    const response = await service.updateById(request);
 
     res.status(200).json({
       data: response,
       error: false,
-      message: "success update subscribe",
+      message: "success update home image by id",
       status: "success",
       statusCode: 200,
       success: true,
@@ -100,7 +89,7 @@ const update = async (req, res, next) => {
 const remove = async (req, res, next) => {
   try {
     const request = {
-      id: req.params.subscribeId,
+      id: req.params.homeImageId,
     };
 
     const response = await service.remove(request);
@@ -108,7 +97,7 @@ const remove = async (req, res, next) => {
     res.status(200).json({
       data: response,
       error: false,
-      message: "success remove subscribe",
+      message: "success delete home image by id",
       status: "success",
       statusCode: 200,
       success: true,
@@ -118,20 +107,4 @@ const remove = async (req, res, next) => {
   }
 };
 
-const getAll = async (req, res, next) => {
-  try {
-    const response = await service.getAll();
-
-    res.status(200).json({
-      data: response,
-      error: false,
-      message: "success get all subscribe",
-      status: "success",
-      statusCode: 200,
-      success: true,
-    });
-  } catch (error) {
-    next(error);
-  }
-};
-module.exports = { create, getMany, getById, update, remove, getAll };
+module.exports = { create, updateById, getAll, getById, remove };

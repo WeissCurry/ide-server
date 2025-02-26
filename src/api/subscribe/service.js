@@ -11,10 +11,10 @@ const create = async (request) => {
 };
 
 // get all
-const getAll = async (request) => {
+const getMany = async (request) => {
   const validData = validation(request, schema.getAll);
 
-  const subscribe = await repository.getAll(validData);
+  const subscribe = await repository.getMany(validData);
   if (subscribe.length === 0) {
     throw new responseError(404, "subscribe not found");
   }
@@ -65,4 +65,13 @@ const remove = async (request) => {
   return result;
 };
 
-module.exports = { create, getAll, getById, update, remove };
+const getAll = async () => {
+  const subscribe = await repository.getAll();
+  if (subscribe.length === 0) {
+    throw new responseError(404, "subscribe not found");
+  }
+
+  return subscribe;
+};
+
+module.exports = { create, getMany, getById, update, remove, getAll };

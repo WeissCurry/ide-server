@@ -11,10 +11,10 @@ const create = async (request) => {
 };
 
 // get all
-const getAll = async (request) => {
+const getMany = async (request) => {
   const validData = validation(request, schema.getAll);
 
-  const contactUs = await repository.getAll(validData);
+  const contactUs = await repository.getMany(validData);
 
   if (contactUs.length === 0) {
     throw new responseError(404, "contact us not found");
@@ -72,10 +72,20 @@ const remove = async (request) => {
   return result;
 };
 
+const getAll = async () => {
+  const contactUs = await repository.getAll();
+  if (contactUs.length === 0) {
+    throw new responseError(404, "contact us not found");
+  }
+
+  return contactUs;
+};
+
 module.exports = {
   create,
-  getAll,
+  getMany,
   getById,
   update,
   remove,
+  getAll,
 };

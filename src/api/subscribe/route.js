@@ -7,8 +7,10 @@ const router = express.Router();
 // create
 router.post("/", controller.create);
 
-// get all
-router.get("/", authentication, controller.getAll);
+// get many
+router.get("/", authentication, controller.getMany);
+
+router.get("/all", authentication, controller.getAll);
 
 // get by id
 router.get("/:subscribeId", authentication, controller.getById);
