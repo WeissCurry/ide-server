@@ -5,3 +5,5 @@ const logger = require("./src/utilities/logging");
 app.listen(port, () => {
   logger.info(`IDE-server app listening on port ${port}`);
 });
+
+module.exports = app;

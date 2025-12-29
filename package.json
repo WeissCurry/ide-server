@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "postinstall": "prisma generate",
     "pretest": "clear",
     "test": "jest -i --detectOpenHandles --forceExit",
     "dev": "nodemon index.js",
